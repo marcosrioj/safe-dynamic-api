@@ -1,4 +1,5 @@
 @inject('model', '\App\Domains\Auth\Models\User')
+@inject('modelDynamicApiGuest', '\App\Domains\Auth\Models\DynamicApiGuest')
 
 @extends('backend.layouts.app')
 

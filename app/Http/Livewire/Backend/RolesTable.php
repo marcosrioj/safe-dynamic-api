@@ -78,10 +78,8 @@ class RolesTable extends TableComponent
                 ->sortable(),
             Column::make(__('Actions'))
                 ->format(function (Role $model) {
-                    if ($model['type'] === "dynamic_api_guest") {
-                        return;
-                    }
-                    return view('backend.auth.role.includes.actions', ['model' => $model]);
+                    $isDiffDynamicApiGuest = $model['type'] !== DynamicApiGuest::ROLE_TYPE;
+                    return view('backend.auth.role.includes.actions', ['model' => $model, 'isDiffDynamicApiGuest' => $isDiffDynamicApiGuest]);
                 }),
         ];
     }

@@ -11,5 +11,9 @@
         <div x-show="userType === '{{ $model::TYPE_USER}}'">
             @include('backend.auth.includes.partials.permission-type', ['type' => $model::TYPE_USER])
         </div>
+
+        <div x-show="userType === '{{ $modelDynamicApiGuest::ROLE_TYPE }}'">
+            @include('backend.auth.includes.partials.permission-type', ['type' => $modelDynamicApiGuest::ROLE_TYPE])
+        </div>
     </div>
 </div><!--form-group-->

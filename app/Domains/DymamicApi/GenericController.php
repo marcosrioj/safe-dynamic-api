@@ -53,9 +53,11 @@ class GenericController
     private static function getConfig(): Config
     {
         return new Config([
-            'username' => 'root',
-            'password' => '',
-            'database' => 'safe-dynamic-api',
+            'driver' => env('DB_CONNECTION'),
+            'address' => env('DB_HOST'),
+            'username' =>  env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
+            'database' => env('DB_DATABASE'),
             'basePath' => '/dynamicapi',
             'middlewares' => 'cors,errors,joinLimits,pageLimits',
             'joinLimits.depth' => 3,

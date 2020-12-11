@@ -1,4 +1,5 @@
 @inject('model', '\App\Domains\Auth\Models\User')
+@inject('modelDynamicApiGuest', '\App\Domains\Auth\Models\DynamicApiGuest')
 
 @extends('backend.layouts.app')
 
@@ -21,10 +22,15 @@
                         <label for="name" class="col-md-2 col-form-label">@lang('Type')</label>
 
                         <div class="col-md-10">
-                            <select name="type" class="form-control" required x-on:change="userType = $event.target.value">
+                            <select name="type" class="form-control" required x-on:change="userType = $event.target.value" {{ $role->type === $modelDynamicApiGuest::ROLE_TYPE ? 'disabled' : '' }}>
                                 <option value="{{ $model::TYPE_USER }}" {{ $role->type === $model::TYPE_USER ? 'selected' : '' }}>@lang('User')</option>
                                 <option value="{{ $model::TYPE_ADMIN }}" {{ $role->type === $model::TYPE_ADMIN ? 'selected' : '' }}>@lang('Administrator')</option>
+                                <option value="{{ $modelDynamicApiGuest::ROLE_TYPE }}" {{ $role->type === $modelDynamicApiGuest::ROLE_TYPE ? 'selected' : '' }}>@lang('Dynamic Api Guest')</option>
                             </select>
+
+                            @if($role->type === $modelDynamicApiGuest::ROLE_TYPE)
+                               <input type="hidden" name="type" value="{{$role->type}}" />
+                            @endif
                         </div>
                     </div><!--form-group-->
 
