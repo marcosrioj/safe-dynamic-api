@@ -18,7 +18,12 @@ class UsersTable extends TableComponent
     /**
      * @var string
      */
-    public $sortField = 'name';
+    public $sortField = 'id';
+
+    /**
+     * @var string
+     */
+    public $sortDirection = 'desc';
 
     /**
      * @var string
@@ -66,6 +71,9 @@ class UsersTable extends TableComponent
     public function columns(): array
     {
         return [
+            Column::make(__('Id'), 'id')
+                ->searchable()
+                ->sortable(),
             Column::make(__('Type'), 'type')
                 ->sortable()
                 ->format(function (User $model) {

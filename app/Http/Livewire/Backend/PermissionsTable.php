@@ -20,7 +20,12 @@ class PermissionsTable extends TableComponent
     /**
      * @var string
      */
-    public $sortField = 'name';
+    public $sortField = 'id';
+
+    /**
+     * @var string
+     */
+    public $sortDirection = 'desc';
 
     /**
      * @var array
