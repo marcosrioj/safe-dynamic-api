@@ -69,9 +69,11 @@ class GenericController
                 // User Auto Filter
                 $user = auth()->guard('api')->user();
                 if (!empty($user)) {
-                    $autoUserFilterCol = env("DYNAMIC_API_COL_AUTO_USER_FILTER");
-                    if (!empty($autoUserFilterCol)) {
-                        return [$autoUserFilterCol => $user["id"]];
+                    if (!$user->isAdmin()) {
+                        $autoUserFilterCol = env("DYNAMIC_API_COL_AUTO_USER_FILTER");
+                        if (!empty($autoUserFilterCol)) {
+                            return [$autoUserFilterCol => $user["id"]];
+                        }
                     }
                 }
             },
