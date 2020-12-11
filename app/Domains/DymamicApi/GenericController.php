@@ -8,7 +8,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config;
 use Nyholm\Psr7\Response;
-use phpDocumentor\Reflection\Types\Boolean;
 
 class GenericController
 {
@@ -55,16 +54,27 @@ class GenericController
         return new Config([
             'driver' => env('DB_CONNECTION'),
             'address' => env('DB_HOST'),
+            'port' => env('DB_PORT'),
             'username' =>  env('DB_USERNAME'),
             'password' => env('DB_PASSWORD'),
             'database' => env('DB_DATABASE'),
             'basePath' => '/dynamicapi',
-            'middlewares' => 'cors,errors,joinLimits,pageLimits',
+            'middlewares' => 'cors,errors,joinLimits,pageLimits,multiTenancy',
             'joinLimits.depth' => 3,
             'joinLimits.tables' => 6,
             'joinLimits.records' => 25,
             'pageLimits.pages' => 10,
             'pageLimits.records' => 25,
+            'multiTenancy.handler' => function ($operation, $tableName) {
+                // User Auto Filter
+                $user = auth()->guard('api')->user();
+                if (!empty($user)) {
+                    $autoUserFilterCol = env("DYNAMIC_API_COL_AUTO_USER_FILTER");
+                    if (!empty($autoUserFilterCol)) {
+                        return [$autoUserFilterCol => $user["id"]];
+                    }
+                }
+            },
         ]);
     }
 
@@ -74,6 +84,9 @@ class GenericController
         $joinparams = [];
 
         foreach ($query as $param) {
+
+            if (empty($param)) continue;
+
             // prevent notice on explode() if $param has no '='
             if (strpos($param, '=') === false) $param += '=';
 
