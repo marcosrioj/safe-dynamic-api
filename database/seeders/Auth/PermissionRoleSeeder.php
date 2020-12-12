@@ -25,19 +25,16 @@ class PermissionRoleSeeder extends Seeder
 
         // Create Roles
         Role::create([
-            'id' => 1,
             'type' => User::TYPE_ADMIN,
             'name' => 'Administrator',
         ]);
 
         Role::create([
-            'id' => 2,
             'type' => User::TYPE_USER,
             'name' => 'User',
         ]);
 
         Role::create([
-            'id' => 3,
             'type' => DynamicApiGuest::ROLE_TYPE,
             'name' => DynamicApiGuest::ROLE_TYPE,
         ]);
