@@ -51,6 +51,9 @@ class GenericController
 
     private static function getConfig(): Config
     {
+        $routeBase = empty(env('ROUTE_BASE')) ?  'dynamicapi' : env('ROUTE_BASE');
+        $routeBase = '/' . str_replace('/', '', $routeBase);
+
         return new Config([
             'driver' => env('DB_CONNECTION'),
             'address' => env('DB_HOST'),
@@ -58,7 +61,7 @@ class GenericController
             'username' =>  env('DB_USERNAME'),
             'password' => env('DB_PASSWORD'),
             'database' => env('DB_DATABASE'),
-            'basePath' => '/dynamicapi',
+            'basePath' => $routeBase,
             'middlewares' => 'cors,errors,joinLimits,pageLimits,multiTenancy',
             'joinLimits.depth' => 3,
             'joinLimits.tables' => 6,
@@ -76,7 +79,7 @@ class GenericController
                 $user = auth()->guard('api')->user();
                 if (!empty($user)) {
                     if (!$user->isAdmin()) {
-                        $autoUserFilterCol = env("DYNAMIC_API_COL_AUTO_USER_FILTER");
+                        $autoUserFilterCol = env("COL_AUTO_USER_FILTER");
                         if (!empty($autoUserFilterCol)) {
                             return [$autoUserFilterCol => $user["id"]];
                         }

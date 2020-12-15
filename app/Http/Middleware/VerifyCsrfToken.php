@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\LoginJwtController;
+use Illuminate\Encryption\Encrypter;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 
 /**
@@ -10,6 +12,22 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
  */
 class VerifyCsrfToken extends Middleware
 {
+    public function __construct(Application $app, Encrypter $encrypter)
+    {
+        $dynamicApiExpect = empty(env('ROUTE_BASE')) ?  'dynamicapi' : env('ROUTE_BASE');
+        $dynamicApiExpect = '/' . str_replace('/', '', $dynamicApiExpect) . '/*';
+
+        $this->except = [
+            '/auth/login',
+            '/auth/logout',
+            '/auth/refresh',
+            '/auth/me',
+            "$dynamicApiExpect"
+        ];
+
+        parent::__construct($app, $encrypter);
+    }
+
     /**
      * Indicates whether the XSRF-TOKEN cookie should be set on the response.
      *
@@ -22,12 +40,5 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array
      */
-    protected $except = [
-        '/auth/login',
-        '/auth/logout',
-        '/auth/refresh',
-        '/auth/me',
-        '/dynamicapi/*'
-        //
-    ];
+    protected $except = [];
 }
