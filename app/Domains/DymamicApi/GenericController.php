@@ -40,10 +40,22 @@ class GenericController
                 }
             }
         } catch (\Exception $e) {
-            $body = new \StdClass();
-            $body->code = 9999;
-            $body->message = $e->getMessage();
             $statusCode = $e->getCode() == 0 ? 500 : $e->getCode();
+            $body = new \StdClass();
+            switch ($statusCode) {
+                case 401:
+                    $body->code = 1011;
+                    break;
+
+                case 403:
+                    $body->code = 1014;
+                    break;
+
+                default:
+                    $body->code = 9999;
+                    break;
+            }
+            $body->message = $e->getMessage();
             $response = new Response($statusCode, ['content-type' => 'application/json'], json_encode($body));
             return $response;
         }
