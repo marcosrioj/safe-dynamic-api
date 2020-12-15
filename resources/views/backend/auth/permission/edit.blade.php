@@ -31,7 +31,7 @@
 
                         <div class="col-md-10">
                             <select name="type" class="form-control" required x-on:change="userType = $event.target.value">
-                                <option value="{{ $modelDynamicApiGuest::ROLE_TYPE }}" {{ $permission->type === $modelDynamicApiGuest::ROLE_TYPE ? 'selected' : '' }}>@lang('Dynamic Api Guest')</option>
+                                <option value="{{ $modelDynamicApiGuest::ROLE_TYPE }}" {{ $permission->type === $modelDynamicApiGuest::ROLE_TYPE ? 'selected' : '' }}>@lang('Guest')</option>
                                 <option value="{{ $model::TYPE_USER }}" {{ $permission->type === $model::TYPE_USER ? 'selected' : '' }}>@lang('User')</option>
                                 <option value="{{ $model::TYPE_ADMIN }}" {{ $permission->type === $model::TYPE_ADMIN ? 'selected' : '' }}>@lang('Administrator')</option>
                             </select>

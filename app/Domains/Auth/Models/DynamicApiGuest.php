@@ -8,5 +8,5 @@ namespace App\Domains\Auth\Models;
  */
 class DynamicApiGuest
 {
-    public const ROLE_TYPE = 'dynamic_api_guest';
+    public const ROLE_TYPE = 'guest';
 }

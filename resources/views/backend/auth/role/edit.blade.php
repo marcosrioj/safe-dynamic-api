@@ -25,7 +25,7 @@
                             <select name="type" class="form-control" required x-on:change="userType = $event.target.value" {{ $role->type === $modelDynamicApiGuest::ROLE_TYPE ? 'disabled' : '' }}>
                                 <option value="{{ $model::TYPE_USER }}" {{ $role->type === $model::TYPE_USER ? 'selected' : '' }}>@lang('User')</option>
                                 <option value="{{ $model::TYPE_ADMIN }}" {{ $role->type === $model::TYPE_ADMIN ? 'selected' : '' }}>@lang('Administrator')</option>
-                                <option value="{{ $modelDynamicApiGuest::ROLE_TYPE }}" {{ $role->type === $modelDynamicApiGuest::ROLE_TYPE ? 'selected' : '' }}>@lang('Dynamic Api Guest')</option>
+                                <option value="{{ $modelDynamicApiGuest::ROLE_TYPE }}" {{ $role->type === $modelDynamicApiGuest::ROLE_TYPE ? 'selected' : '' }}>@lang('Guest')</option>
                             </select>
 
                             @if($role->type === $modelDynamicApiGuest::ROLE_TYPE)

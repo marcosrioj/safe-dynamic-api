@@ -23,7 +23,7 @@
 
                         <div class="col-md-10">
                             <select name="type" class="form-control" required x-on:change="userType = $event.target.value">
-                                <option value="{{ $modelDynamicApiGuest::ROLE_TYPE }}">@lang('Dynamic Api Guest')</option>
+                                <option value="{{ $modelDynamicApiGuest::ROLE_TYPE }}">@lang('Guest')</option>
                                 <option value="{{ $model::TYPE_USER }}">@lang('User')</option>
                                 <option value="{{ $model::TYPE_ADMIN }}">@lang('Administrator')</option>
                             </select>
@@ -34,7 +34,7 @@
                         <label for="name" class="col-md-2 col-form-label">@lang('Name')</label>
 
                         <div class="col-md-10">
-                            <input type="text" name="name" class="form-control" placeholder="{{ __('Examples') }}: get.myTable or post.myTable or admin.access.sample or user.access.sample " value="{{ old('name') }}" maxlength="250" required />
+                            <input type="text" name="name" class="form-control" placeholder="{{ __('Examples') }}: get.myTable or post.myTable or get.join.myTable.anotherTable or admin.access.sample or user.access.sample " value="{{ old('name') }}" maxlength="250" required />
                         </div>
                     </div>
 
