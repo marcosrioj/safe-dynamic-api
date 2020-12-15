@@ -15,7 +15,7 @@ class VerifyCsrfToken extends Middleware
     public function __construct(Application $app, Encrypter $encrypter)
     {
         $dynamicApiExpect = empty(env('ROUTE_BASE')) ?  'dynamicapi' : env('ROUTE_BASE');
-        $dynamicApiExpect = '/' . str_replace('/', '', $dynamicApiExpect) . '/*';
+        $dynamicApiExpect = '/' . str_replace('/', '', strtolower($dynamicApiExpect)) . '/*';
 
         $this->except = [
             '/auth/login',

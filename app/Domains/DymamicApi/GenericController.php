@@ -41,10 +41,10 @@ class GenericController
             }
         } catch (\Exception $e) {
             $body = new \StdClass();
-            $body->error = true;
-            $body->errorMessage = $e->getMessage();
+            $body->code = 9999;
+            $body->message = $e->getMessage();
             $statusCode = $e->getCode() == 0 ? 500 : $e->getCode();
-            $response = new Response($statusCode, [], json_encode($body));
+            $response = new Response($statusCode, ['content-type' => 'application/json'], json_encode($body));
             return $response;
         }
     }
@@ -52,7 +52,11 @@ class GenericController
     private static function getConfig(): Config
     {
         $routeBase = empty(env('ROUTE_BASE')) ?  'dynamicapi' : env('ROUTE_BASE');
-        $routeBase = '/' . str_replace('/', '', $routeBase);
+        $routeBase = '/' . str_replace('/', '', strtolower($routeBase));
+
+        if ($routeBase == '/api') {
+            throw new \Exception("The base route cannot be called 'API'. This name is used for API's that are created manually.");
+        }
 
         return new Config([
             'driver' => env('DB_CONNECTION'),
