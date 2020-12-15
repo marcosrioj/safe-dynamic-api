@@ -55,7 +55,7 @@ class PermissionService extends BaseService
         DB::beginTransaction();
 
         try {
-            $permission = $this->model::create([
+            $permission = $this->model::customCreate([
                 'type' => $data['type'],
                 'name' => $data['name'],
                 'description' => $data['description'],

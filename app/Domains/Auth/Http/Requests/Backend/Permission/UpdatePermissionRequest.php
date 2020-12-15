@@ -21,8 +21,8 @@ class UpdatePermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => ['required', Rule::in([User::TYPE_ADMIN, User::TYPE_USER, DynamicApiGuest::ROLE_TYPE])],
-            'name' => ['required', 'max:250', Rule::unique('permissions')->ignore($this->permission)],
+            'type' => ['required', Rule::in([User::TYPE_ADMIN, User::TYPE_USER, DynamicApiGuest::ROLE_TYPE]), Rule::unique('permissions')->where('name', $this['name'])->ignore($this->permission)],
+            'name' => ['required', 'max:250', Rule::unique('permissions')->where('type', $this['type'])->ignore($this->permission)],
             'description' => ['required', 'max:250'],
             'sort' => ['max:10'],
             'parent_id' => ['max:20'],
