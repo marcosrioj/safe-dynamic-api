@@ -88,7 +88,7 @@ class PermissionService extends BaseService
         DB::beginTransaction();
 
         try {
-            if ($permission->roles()->count()) {
+            if ($permission['type'] != $data['type'] && $permission->roles()->count()) {
                 throw new GeneralException("One or more roles are using this permission.");
             }
 

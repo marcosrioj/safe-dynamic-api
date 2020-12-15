@@ -112,11 +112,11 @@ class GenericController
 
     private static function getPermissions($tableName, $requestMethod, $joinparams = []): array
     {
-        $basePermission = "dynamic_api." . strtolower($requestMethod);
+        $basePermission = strtolower($requestMethod);
         $permission = $basePermission . "." . strtolower($tableName);
+        $permissionsResult = [$permission];
 
         if (count($joinparams) > 0) {
-            $withJoinPermissions = [$permission];
             $joinPermission = str_replace($basePermission, $basePermission . ".join", $permission);
 
             foreach ($joinparams as $joinparam) {
@@ -127,18 +127,16 @@ class GenericController
                     $joinPosPermission = $joinPosPermission . ".$item";
                 }
 
-                $withJoinPermissions[] = $joinPermission . $joinPosPermission;
+                $permissionsResult[] = $joinPermission . $joinPosPermission;
             }
-
-            return $withJoinPermissions;
-        } else {
-            return [$permission];
         }
+
+        return $permissionsResult;
     }
 
     private static function guestHasPermission($tableName, $requestMethod, $joinparams): bool
     {
-        $role = Role::findOrCreate(DynamicApiGuest::ROLE_TYPE);
+        $role = Role::findByName(DynamicApiGuest::ROLE_TYPE);
         $permissions = self::getPermissions($tableName, $requestMethod, $joinparams);
         $hasPermission = false;
 

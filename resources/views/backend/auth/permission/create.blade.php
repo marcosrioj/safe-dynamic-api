@@ -34,7 +34,7 @@
                         <label for="name" class="col-md-2 col-form-label">@lang('Name')</label>
 
                         <div class="col-md-10">
-                            <input type="text" name="name" class="form-control" placeholder="{{ __('Examples') }}: dynamic_api.get.myTable or dynamic_api.post.myTable or admin.access.sample or user.access.sample " value="{{ old('name') }}" maxlength="250" required />
+                            <input type="text" name="name" class="form-control" placeholder="{{ __('Examples') }}: get.myTable or post.myTable or admin.access.sample or user.access.sample " value="{{ old('name') }}" maxlength="250" required />
                         </div>
                     </div>
 
