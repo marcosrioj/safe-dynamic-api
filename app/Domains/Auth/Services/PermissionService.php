@@ -3,9 +3,11 @@
 namespace App\Domains\Auth\Services;
 
 use App\Domains\Auth\Models\Permission;
+use App\Domains\Auth\Models\Role;
 use App\Services\BaseService;
 use Exception;
 use App\Exceptions\GeneralException;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -84,8 +86,12 @@ class PermissionService extends BaseService
     public function update(Permission $permission, array $data = []): Permission
     {
         DB::beginTransaction();
-        
+
         try {
+            if ($permission->roles()->count()) {
+                throw new GeneralException("One or more roles are using this permission.");
+            }
+
             $permission->update([
                 'type' => $data['type'],
                 'name' => $data['name'],
@@ -96,7 +102,7 @@ class PermissionService extends BaseService
         } catch (Exception $e) {
             DB::rollBack();
 
-            throw new GeneralException(__('There was a problem updating the permission.'));
+            throw new GeneralException(__('There was a problem updating the permission. ' . $e->getMessage()));
         }
 
         DB::commit();
@@ -112,6 +118,10 @@ class PermissionService extends BaseService
      */
     public function destroy(Permission $permission): bool
     {
+        if ($permission->roles()->count()) {
+            throw new GeneralException(__("One or more roles are using this permission."));
+        }
+
         if ($permission->users()->count()) {
             throw new GeneralException(__('You can not delete a permission with associated users.'));
         }

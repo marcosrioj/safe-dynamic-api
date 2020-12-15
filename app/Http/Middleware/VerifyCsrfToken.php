@@ -26,7 +26,8 @@ class VerifyCsrfToken extends Middleware
         '/auth/login',
         '/auth/logout',
         '/auth/refresh',
-        '/auth/me'
+        '/auth/me',
+        '/dynamicapi/*'
         //
     ];
 }
