@@ -18,14 +18,22 @@ class ResetPasswordNotification extends Notification
     public $token;
 
     /**
+     * The password reset token.
+     *
+     * @var string
+     */
+    public $returnUrl;
+
+    /**
      * Create a notification instance.
      *
      * @param  string  $token
      * @return void
      */
-    public function __construct($token)
+    public function __construct($token, $returnUrl = '')
     {
         $this->token = $token;
+        $this->returnUrl = $returnUrl;
     }
 
     /**
@@ -47,11 +55,22 @@ class ResetPasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        if (!empty($this->returnUrl)) {
+            $parsedUrl = parse_url($this->returnUrl);
+            if (empty($parsedUrl['path'])) {
+                $this->returnUrl .= '/';
+            }
+            $separator = (empty($parsedUrl['query'])) ? '?' : '&';
+            $this->returnUrl .= $separator . "token=$this->token&email=" . $notifiable->getEmailForPasswordReset();
+        } else {
+            $this->returnUrl = route('frontend.auth.password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()]);
+        }
+
         return (new MailMessage)
             ->subject(__('Reset Password Notification'))
             ->line(__('You are receiving this email because we received a password reset request for your account.'))
-            ->action(__('Reset Password'), route('frontend.auth.password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()]))
-            ->line(__('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
+            ->action(__('Reset Password'), $this->returnUrl)
+            ->line(__('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.' . config('auth.defaults.passwords') . '.expire')]))
             ->line(__('If you did not request a password reset, no further action is required.'));
     }
 }

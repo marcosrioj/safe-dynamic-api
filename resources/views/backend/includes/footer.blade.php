@@ -10,6 +10,6 @@
 
     <div class="mfs-auto">
         @lang('Powered by')
-        <x-utils.link href="https://www.marcoslima.com/products/safe-dynamic-api" target="_blank" :text="__(appName())" /> &
+        <x-utils.link href="https://www.marcoslima.com/products/safe-dynamic-api" target="_blank" :text="__(appName())" />
     </div>
 </footer>

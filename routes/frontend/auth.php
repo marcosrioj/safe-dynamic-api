@@ -2,11 +2,14 @@
 
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\ConfirmPasswordController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\DisableTwoFactorAuthenticationController;
+use App\Domains\Auth\Http\Controllers\Frontend\Auth\ForgotPasswordApiController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\ForgotPasswordController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\LoginController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\LoginJwtController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\PasswordExpiredController;
+use App\Domains\Auth\Http\Controllers\Frontend\Auth\RegisterApiController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\RegisterController;
+use App\Domains\Auth\Http\Controllers\Frontend\Auth\ResetPasswordApiController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\ResetPasswordController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\SocialController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\TwoFactorAuthenticationController;
@@ -86,12 +89,15 @@ Route::group(['as' => 'auth.'], function () {
         // Registration
         Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
         Route::post('register', [RegisterController::class, 'register']);
+        Route::post('api/register', [RegisterApiController::class, 'api.register']);
 
         // Password Reset
         Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
         Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+        Route::post('api/password/email', [ForgotPasswordApiController::class, 'sendResetLinkEmail'])->name('api.password.email');
         Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
         Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+        Route::post('api/password/reset', [ResetPasswordApiController::class, 'reset'])->name('api.password.update');
 
         // Socialite Routes
         Route::get('login/{provider}', [SocialController::class, 'redirect'])->name('social.login');

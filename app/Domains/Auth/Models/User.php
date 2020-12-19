@@ -114,9 +114,9 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
      * @param  string  $token
      * @return void
      */
-    public function sendPasswordResetNotification($token): void
+    public function sendPasswordResetNotification($token, $returnUrl = ''): void
     {
-        $this->notify(new ResetPasswordNotification($token));
+        $this->notify(new ResetPasswordNotification($token, $returnUrl));
     }
 
     /**

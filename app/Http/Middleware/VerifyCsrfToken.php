@@ -22,6 +22,9 @@ class VerifyCsrfToken extends Middleware
             '/auth/logout',
             '/auth/refresh',
             '/auth/me',
+            'api/register',
+            'api/password/email',
+            'api/password/reset',
             "$dynamicApiExpect"
         ];
 
