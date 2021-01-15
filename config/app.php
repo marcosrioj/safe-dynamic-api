@@ -180,6 +180,10 @@ return [
         App\Providers\ObserverServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Adminer
+         */
+        Onecentlin\Adminer\ServiceProvider::class,
     ],
 
     /*

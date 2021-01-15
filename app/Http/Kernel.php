@@ -43,6 +43,16 @@ class Kernel extends HttpKernel
             \App\Domains\Auth\Http\Middleware\ToBeLoggedOut::class,
         ],
 
+        'adminer' => [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+    
+            // you may create customized middleware to fit your needs
+            // example uses Laravel default authentication (default protection)
+            \Illuminate\Auth\Middleware\Authenticate::class,
+        ],
+
         'api' => [
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,

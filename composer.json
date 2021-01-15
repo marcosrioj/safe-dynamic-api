@@ -25,6 +25,7 @@
         "laravel/ui": "^3.0",
         "livewire/livewire": "^2.0",
         "mevdschee/php-crud-api": "^2.9",
+        "onecentlin/laravel-adminer": "^5.1",
         "rappasoft/laravel-livewire-tables": "^0.3",
         "rappasoft/lockout": "^3.0",
         "spatie/laravel-activitylog": "^3.14",
