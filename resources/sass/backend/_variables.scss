@@ -1,0 +1,23 @@
+// Colors
+$blue1: #075c72;
+$blue2: #053644;
+
+$green1: #469a5a;
+$green2: #0b8c6b;
+
+a {
+    color: $green2;
+
+    &:hover {
+        color: $green1;
+    }
+}
+
+.c-sidebar {
+    background: $blue2;
+
+    .c-sidebar-nav-link:hover,
+    .c-sidebar-nav-dropdown-toggle:hover {
+        background: $blue1;
+    }
+}

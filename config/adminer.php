@@ -1,6 +1,6 @@
 <?php
 
-$adminerRoutePrefix = env('SQL_MANAGER_ROUTE_PREFIX') ?: 'adminer';
+$adminerRoutePrefix = env('SQL_MANAGER_ROUTE_PREFIX') ?: 'sqlmanager';
 
 return [
 
@@ -21,7 +21,7 @@ return [
     | Route Prefix
     |--------------------------------------------------------------------------
     |
-    | You may customize route prefix. (default: 'adminer')
+    | You may customize route prefix. (default: 'sqlmanager')
     |
     */
     'route_prefix' => $adminerRoutePrefix,
