@@ -85,7 +85,7 @@ class GenericController
             'pageLimits.pages' => 10,
             'pageLimits.records' => 25,
             "cors.allowedOrigins" => env('CORS_ALLOWED_ORIGINS', '*'),
-            "cors.allowHeaders" => env('CORS_ALLOWED_HEADERS', 'Content-Type, X-XSRF-TOKEN, X-Authorization'),
+            "cors.allowHeaders" => env('CORS_ALLOWED_HEADERS', 'Content-Type, X-XSRF-TOKEN, Authorization'),
             "cors.allowMethods" => env('CORS_ALLOWED_METHODS', 'OPTIONS, GET, PUT, POST, DELETE, PATCH'),
             "cors.allowCredentials" => env('CORS_ALLOW_CREDENTIALS', 'false'),
             "cors.exposeHeaders" => env('CORS_EXPOSE_HEADERS', ''),

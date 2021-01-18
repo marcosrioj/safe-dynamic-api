@@ -1,7 +1,7 @@
 <?php
 
 $allowedOrigins = array_map('trim', explode(',', env('CORS_ALLOWED_ORIGINS', '*')));
-$allowHeaders = array_map('trim', explode(',', env('CORS_ALLOWED_HEADERS', 'Content-Type, X-XSRF-TOKEN, X-Authorization')));
+$allowHeaders = array_map('trim', explode(',', env('CORS_ALLOWED_HEADERS', 'Content-Type, X-XSRF-TOKEN, Authorization')));
 $allowedOriginsPatterns = array_map('trim', explode(',', env('CORS_CORS_ALLOWED_ORIGINS_PATTERNS', '')));
 $allowMethods = array_map('trim', explode(',', env('CORS_ALLOWED_METHODS', 'OPTIONS, GET, PUT, POST, DELETE, PATCH')));
 $allowCredentials = env('CORS_ALLOW_CREDENTIALS') ?: false;
