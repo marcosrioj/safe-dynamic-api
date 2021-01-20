@@ -8,6 +8,9 @@ $allowCredentials = env('CORS_ALLOW_CREDENTIALS') ?: false;
 $exposeHeaders = array_map('trim', explode(',', env('CORS_EXPOSE_HEADERS', '')));
 $maxAge = env('CORS_MAX_AGE') ?: 1728000;
 
+$routeDynamicApiBase = empty(env('ROUTE_BASE')) ?  'dynamicapi' : env('ROUTE_BASE');
+$routeDynamicApiBase = str_replace('/', '', strtolower($routeDynamicApiBase));
+
 
 return [
 
@@ -24,7 +27,7 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'auth/*'],
+    'paths' => ['api/*', 'auth/*', "$routeDynamicApiBase/*"],
 
     'allowed_methods' => $allowMethods,
 
