@@ -1,8 +1,8 @@
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
     <div class="c-sidebar-brand d-lg-down-none">
-        <img class="c-sidebar-brand-full" src="{{ asset('img/brand/logo-text-white.png') }}" height="46" alt="SafeDynamicAPI Logo"/>
+        <img class="c-sidebar-brand-full" src="{{ asset('img/brand/logo-text-white-46.png') }}" height="46" alt="SafeDynamicAPI Logo"/>
 
-        <img class="c-sidebar-brand-minimized" src="{{ asset('img/brand/logo.png') }}" height="46" alt="SafeDynamicAPI Logo"/>
+        <img class="c-sidebar-brand-minimized" src="{{ asset('img/brand/logo-text-46.png') }}" height="46" alt="SafeDynamicAPI Logo"/>
     </div><!--c-sidebar-brand-->
 
     <ul class="c-sidebar-nav">
