@@ -95,7 +95,7 @@ class GenericController
                 $user = auth()->guard('api')->user();
                 if (!empty($user)) {
                     if (!$user->isAdmin()) {
-                        $autoUserFilterCol = env("COL_AUTO_USER_FILTER");
+                        $autoUserFilterCol = env("COL_AUTO_USER_FILTER", "user_id");
                         if (!empty($autoUserFilterCol)) {
                             return [$autoUserFilterCol => $user["id"]];
                         }
