@@ -89,7 +89,7 @@ Route::group(['as' => 'auth.'], function () {
         // Registration
         Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
         Route::post('register', [RegisterController::class, 'register']);
-        Route::post('api/register', [RegisterApiController::class, 'api.register']);
+        Route::post('api/register', [RegisterApiController::class, 'register']);
 
         // Password Reset
         Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
