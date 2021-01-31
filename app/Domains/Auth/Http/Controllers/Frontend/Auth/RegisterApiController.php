@@ -2,6 +2,7 @@
 
 namespace App\Domains\Auth\Http\Controllers\Frontend\Auth;
 
+use App\Domains\Auth\Services\RoleService;
 use App\Domains\Auth\Services\UserService;
 use App\Http\Controllers\Controller;
 use App\Rules\Captcha;
@@ -37,13 +38,19 @@ class RegisterApiController extends Controller
     protected $userService;
 
     /**
+     * @var RoleService
+     */
+    protected $roleService;
+
+    /**
      * RegisterController constructor.
      *
      * @param  UserService  $userService
      */
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, RoleService $roleService)
     {
         $this->userService = $userService;
+        $this->roleService = $roleService;
     }
 
     /**
@@ -56,6 +63,7 @@ class RegisterApiController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:100'],
+            'role_id' => ['required', 'numeric', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')],
             'password' => array_merge(['max:100'], PasswordRules::register($data['email'] ?? null)),
             'terms' => ['required', 'in:1'],
@@ -74,7 +82,10 @@ class RegisterApiController extends Controller
      */
     protected function create(array $data)
     {
-        return $this->userService->registerUser($data);
+        $role = $this->roleService->getById($data['role_id']);
+        $user =  $this->userService->registerUser($data);
+        $user->syncRoles([$role]);
+        return $user;
     }
 
     /**
