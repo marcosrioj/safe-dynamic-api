@@ -50,8 +50,8 @@ class SocialController extends Controller
 
         if (!empty($redirectTo)) { //API
             try {
-
-                $user = $userService->registerProvider(Socialite::driver($provider)->user(), $provider);
+                $defaultRoleId = env('SOCIAL_USER_ROLE_ID_DEFAULT', 2); //user
+                $user = $userService->registerProvider(Socialite::driver($provider)->user(), $provider, $defaultRoleId);
 
                 if (!$user->isActive()) {
                     auth()->logout();

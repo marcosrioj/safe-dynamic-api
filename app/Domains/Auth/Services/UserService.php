@@ -21,13 +21,19 @@ use Illuminate\Support\Facades\Hash;
 class UserService extends BaseService
 {
     /**
+     * @var RoleService
+     */
+    protected $roleService;
+
+    /**
      * UserService constructor.
      *
      * @param  User  $user
      */
-    public function __construct(User $user)
+    public function __construct(User $user, RoleService $roleService)
     {
         $this->model = $user;
+        $this->roleService = $roleService;
     }
 
     /**
@@ -75,11 +81,11 @@ class UserService extends BaseService
      * @return mixed
      * @throws GeneralException
      */
-    public function registerProvider($info, $provider): User
+    public function registerProvider($info, $provider, $defaultRoleId = null): User
     {
         $user = $this->model::where('provider_id', $info->id)->first();
 
-        if (! $user) {
+        if (!$user) {
             DB::beginTransaction();
 
             try {
@@ -90,6 +96,11 @@ class UserService extends BaseService
                     'provider_id' => $info->id,
                     'email_verified_at' => now(),
                 ]);
+
+                if (!empty($defaultRoleId)) {
+                    $role = $this->roleService->getById($defaultRoleId);
+                    $user->syncRoles([$role]);
+                }
             } catch (Exception $e) {
                 DB::rollBack();
 
@@ -125,7 +136,7 @@ class UserService extends BaseService
 
             $user->syncRoles($data['roles'] ?? []);
 
-            if (! config('boilerplate.access.user.only_roles')) {
+            if (!config('boilerplate.access.user.only_roles')) {
                 $user->syncPermissions($data['permissions'] ?? []);
             }
         } catch (Exception $e) {
@@ -139,7 +150,7 @@ class UserService extends BaseService
         DB::commit();
 
         // They didn't want to auto verify the email, but do they want to send the confirmation email to do so?
-        if (! isset($data['email_verified']) && isset($data['send_confirmation_email']) && $data['send_confirmation_email'] === '1') {
+        if (!isset($data['email_verified']) && isset($data['send_confirmation_email']) && $data['send_confirmation_email'] === '1') {
             $user->sendEmailVerificationNotification();
         }
 
@@ -164,11 +175,11 @@ class UserService extends BaseService
                 'email' => $data['email'],
             ]);
 
-            if (! $user->isMasterAdmin()) {
+            if (!$user->isMasterAdmin()) {
                 // Replace selected roles/permissions
                 $user->syncRoles($data['roles'] ?? []);
 
-                if (! config('boilerplate.access.user.only_roles')) {
+                if (!config('boilerplate.access.user.only_roles')) {
                     $user->syncPermissions($data['permissions'] ?? []);
                 }
             }
@@ -217,7 +228,7 @@ class UserService extends BaseService
     {
         if (isset($data['current_password'])) {
             throw_if(
-                ! Hash::check($data['current_password'], $user->password),
+                !Hash::check($data['current_password'], $user->password),
                 new GeneralException(__('That is not your old password.'))
             );
         }
