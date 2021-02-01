@@ -22,9 +22,10 @@ class SocialController extends Controller
     {
         $redirectTo = request()->get('redirectTo');
         $driver = Socialite::driver($provider);
+        \Session::put('redirectTo', $redirectTo);
 
         if (!empty($redirectTo)) {
-            $driver->with(['redirect' => $redirectTo]);
+            $driver->with(['redirectTo' => $redirectTo]);
         }
 
         return $driver->redirect();
@@ -46,6 +47,9 @@ class SocialController extends Controller
             if (array_key_exists('redirectTo', $queryParameters)) {
                 $redirectTo = $queryParameters['redirectTo'];
             }
+        } else {
+            $redirectTo = \Session::get('redirectTo');
+            \Session::remove('redirectTo');
         }
 
         $defaultRoleId = env('SOCIAL_USER_ROLE_ID_DEFAULT', 2); //user
