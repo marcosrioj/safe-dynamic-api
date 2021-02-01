@@ -48,9 +48,10 @@ class SocialController extends Controller
             }
         }
 
+        $defaultRoleId = env('SOCIAL_USER_ROLE_ID_DEFAULT', 2); //user
+
         if (!empty($redirectTo)) { //API
             try {
-                $defaultRoleId = env('SOCIAL_USER_ROLE_ID_DEFAULT', 2); //user
                 $user = $userService->registerProvider(Socialite::driver($provider)->user(), $provider, $defaultRoleId);
 
                 if (!$user->isActive()) {
@@ -81,7 +82,7 @@ class SocialController extends Controller
                 return $response;
             }
         } else {
-            $user = $userService->registerProvider(Socialite::driver($provider)->user(), $provider);
+            $user = $userService->registerProvider(Socialite::driver($provider)->user(), $provider, $defaultRoleId);
 
             if (!$user->isActive()) {
                 auth()->logout();
