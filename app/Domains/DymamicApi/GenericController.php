@@ -78,7 +78,7 @@ class GenericController
             'password' => env('DB_PASSWORD'),
             'database' => env('DB_DATABASE'),
             'basePath' => $routeBase,
-            'middlewares' => 'cors,errors,joinLimits,pageLimits,multiTenancy',
+            'middlewares' => 'cors,errors,joinLimits,pageLimits,multiTenancy,xml',
             'joinLimits.depth' => 3,
             'joinLimits.tables' => 6,
             'joinLimits.records' => 25,
