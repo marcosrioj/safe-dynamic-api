@@ -1,5 +1,11 @@
 <?php
-
+/* 
+ *  Copyright (C) SafeDynamiAPI - All Rights Reserved
+ *  Unauthorized copying of this file, via any medium is strictly prohibited
+ *  Proprietary and confidential
+ *  Written by Marcos Lima <marcoslima@marcoslima.com>, Sat Feb 06 2021
+ *  File: AnnouncementService.php
+ */
 namespace App\Domains\Announcement\Services;
 
 use App\Domains\Announcement\Models\Announcement;

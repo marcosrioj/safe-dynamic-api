@@ -1,5 +1,11 @@
 <?php
-
+/* 
+ *  Copyright (C) SafeDynamiAPI - All Rights Reserved
+ *  Unauthorized copying of this file, via any medium is strictly prohibited
+ *  Proprietary and confidential
+ *  Written by Marcos Lima <marcoslima@marcoslima.com>, Sat Feb 06 2021
+ *  File: 2020_07_06_215139_create_activity_log_table.php
+ */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

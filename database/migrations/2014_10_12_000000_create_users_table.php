@@ -1,5 +1,11 @@
 <?php
-
+/* 
+ *  Copyright (C) SafeDynamiAPI - All Rights Reserved
+ *  Unauthorized copying of this file, via any medium is strictly prohibited
+ *  Proprietary and confidential
+ *  Written by Marcos Lima <marcoslima@marcoslima.com>, Sat Feb 06 2021
+ *  File: 2014_10_12_000000_create_users_table.php
+ */
 use App\Domains\Auth\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

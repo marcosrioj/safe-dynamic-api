@@ -1,5 +1,11 @@
 <?php
-
+/* 
+ *  Copyright (C) SafeDynamiAPI - All Rights Reserved
+ *  Unauthorized copying of this file, via any medium is strictly prohibited
+ *  Proprietary and confidential
+ *  Written by Marcos Lima <marcoslima@marcoslima.com>, Sat Feb 06 2021
+ *  File: cors.php
+ */
 $allowedOrigins = array_map('trim', explode(',', env('CORS_ALLOWED_ORIGINS', '*')));
 $allowHeaders = array_map('trim', explode(',', env('CORS_ALLOWED_HEADERS', 'Content-Type, X-XSRF-TOKEN, Authorization')));
 $allowedOriginsPatterns = array_map('trim', explode(',', env('CORS_CORS_ALLOWED_ORIGINS_PATTERNS', '')));

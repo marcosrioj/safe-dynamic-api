@@ -1,5 +1,11 @@
 <?php
-
+/* 
+ *  Copyright (C) SafeDynamiAPI - All Rights Reserved
+ *  Unauthorized copying of this file, via any medium is strictly prohibited
+ *  Proprietary and confidential
+ *  Written by Marcos Lima <marcoslima@marcoslima.com>, Sat Feb 06 2021
+ *  File: auth.php
+ */
 use App\Domains\Auth\Http\Controllers\Backend\Permission\PermissionController;
 use App\Domains\Auth\Http\Controllers\Backend\Role\RoleController;
 use App\Domains\Auth\Http\Controllers\Backend\User\DeactivatedUserController;

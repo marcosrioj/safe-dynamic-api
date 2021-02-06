@@ -1,3 +1,11 @@
+<!-- 
+ Copyright (C) SafeDynamiAPI - All Rights Reserved
+ Unauthorized copying of this file, via any medium is strictly prohibited
+ Proprietary and confidential
+ Written by Marcos Lima <marcoslima@marcoslima.com>, Sat Feb 06 2021
+ File: phpunit.xml
+ -->
+
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
