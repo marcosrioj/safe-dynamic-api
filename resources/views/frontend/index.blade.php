@@ -99,7 +99,7 @@
                 </div><!--title-->
 
                 <div class="links">
-                    <a href="https://marcoslimacom.github.io/safe-dynamic-api-doc" target="_blank"><i class="fa fa-book"></i> @lang('Docs')</a>
+                    <a href="https://safe-dynamic-api-doc.vercel.app" target="_blank"><i class="fa fa-book"></i> @lang('Docs')</a>
                 </div><!--links-->
             </div><!--content-->
         </div><!--app-->

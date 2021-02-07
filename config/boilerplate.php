@@ -8,7 +8,7 @@
  */
 /*
  * All configuration options for SafeDynamicApi
- * https://marcoslimacom.github.io/safe-dynamic-api-doc/
+ * https://safe-dynamic-api-doc.vercel.app/
  */
 
 return [
